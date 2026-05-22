@@ -95,7 +95,43 @@ pruebas = [
 
 pruebaserror = [
 #los que dan error
+    # caracter invalido
     """
     int x = 5 @ 3;
     """,
+
+    # operador inexistente
+    """
+    int x = 10 % 2;
+    """,
+
+    # string sin cerrar
+    """
+    print("hola);
+    """,
+
+    # caracter invalido en identificador
+    """
+    int x$ = 5;
+    """,
+
+    # numero mal formado
+    """
+    float y = 3.1.4;
+    """,
+
+    # simbolo no definido
+    """
+    int x = 5 ^ 2;
+    """,
+
+    # doble simbolo invalido
+    """
+    x => 5;
+    """,
+
+    # caracter aislado invalido
+    """
+    ~
+    """
 ]
