@@ -11,6 +11,7 @@
 #importar archivo con codigos de pruebas, donde la prueba tiene que tener el nombre
 from afds import lista_afds
 from tests import pruebas
+from tests import pruebaserror
 
 
 def lexer_multiples_afds(codigo_fuente):
@@ -54,23 +55,44 @@ def lexer_multiples_afds(codigo_fuente):
     tokens.append(("EOF", "EOF")) #se agrega manual el final de los tokens
     return tokens #salida del lexer con el conjunto de tokens
 
-#for para el formato de listas de pruebas, ejemplo
-#pruebas = [
-#   "int x = 5;",
-#    "float y = 3.14;",
-#    "if(x>0){x=x-1;}",
-
-#extender mas para un codigo real
 
 for i, prueba in enumerate(pruebas, start=1):
 
     print(f"\n--- PRUEBA {i} ---")
     print("Código fuente:")
     print(prueba)
+#el try en este se agrega momentaneamente para identificar errores en afd, luego se debe quitar porque deben dar correctos
+    try:
+        tokens = lexer_multiples_afds(prueba)
 
-    tokens = lexer_multiples_afds(prueba)
+        print("Tokens encontrados:")
 
-    print("Tokens encontrados:")
+        for token in tokens:
+            print(token)
 
-    for token in tokens:
-        print(token)
+    except ValueError as e:
+        print(prueba[i])
+        print("ERROR:", e)
+
+
+# pruebas que deben dar error
+
+for i, prueba in enumerate(pruebaserror, start=1):
+
+    print(f"\n--- PRUEBA ERROR {i} ---")
+    print("Código fuente:")
+    print(prueba)
+
+    print("El lexer debe dar error")
+#se agrega el try para que por mas que de error se continue con la lista
+    try:
+        tokens = lexer_multiples_afds(prueba)
+
+        print("Tokens encontrados:")
+
+        for token in tokens:
+            print(token)
+
+    except ValueError as e:
+        print("ERROR DETECTADO CORRECTAMENTE:")
+        print(e)
