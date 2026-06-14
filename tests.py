@@ -12,7 +12,7 @@ pruebas = [
     """,
 
     """
-    int suma(int a, int b){
+    int suma_enteros(int a, int b){
         int r;
         r = a + b;
         return r;
@@ -20,7 +20,7 @@ pruebas = [
 
     int main(){
         int total;
-        total = suma(3, 4);
+        total = suma_enteros(3, 4);
 
         print(total);
 
@@ -34,9 +34,9 @@ pruebas = [
         x = x + 1;
 
         if(x != 3){
-            print("hola");
+            print("Hola, mundo.");
         }else{
-            print("chau");
+            print("Chau");
         }
     }
 
@@ -72,7 +72,7 @@ pruebas = [
 
     read(x);
 
-    if(!(x == 0)){
+    if(!(x   0)){
         print(x);
     }
     """,
