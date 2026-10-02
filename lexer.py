@@ -1,5 +1,4 @@
-# Importante:
-# -----------
+
 # importar AFD desde otro archivo (mas prolijo) en orden de relevancia
 # En cada uno requerimos:
 # - 'tipo': clase de token que reconoce dicho autómata
@@ -9,6 +8,8 @@
 
 
 #importar archivo con codigos de pruebas, donde la prueba tiene que tener el nombre
+import sys
+sys.path.insert(0, '/content/Lexer')
 from afds import lista_afds
 from tests import pruebas
 from tests import pruebaserror
@@ -49,7 +50,9 @@ def lexer_multiples_afds(codigo_fuente):
         if longitud_mejor_match == 0:
             raise ValueError(f"Carácter Inesperado en posición {pos_actual}")
 
-        tokens.append((tipo_mejor_match, lexema_mejor_match))
+        if tipo_mejor_match != "WHITE SPACE":
+          tokens.append((tipo_mejor_match, lexema_mejor_match))
+
         pos_actual += longitud_mejor_match #arranca del ultimo lugar
 
     tokens.append(("EOF", "EOF")) #se agrega manual el final de los tokens
@@ -61,7 +64,8 @@ for i, prueba in enumerate(pruebas, start=1):
     print(f"\n--- PRUEBA {i} ---")
     print("Código fuente:")
     print(prueba)
-#el try en este se agrega momentaneamente para identificar errores en afd, luego se debe quitar porque deben dar correctos
+
+    #el try en este se agrega momentaneamente para identificar errores en afd, luego se debe quitar porque deben dar correctos
     try:
         tokens = lexer_multiples_afds(prueba)
 
